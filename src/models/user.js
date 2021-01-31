@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    role: {
-      type: DataTypes.STRING,
+    roleId: {
+      type: DataTypes.INTEGER,
       defaultValue: 'requester'
     },
     googleId: {

@@ -72,11 +72,12 @@ class User {
     static signIn = async (req, res) => {
         try {
             const userDetails = req.user;
-            const {id, firstName, lastName, email} = userDetails.dataValues;
+            const {id, firstName, lastName, email,roleId} = userDetails.dataValues;
             const response = {
                 id,
                 fullName: `${firstName} ${lastName}`,
-                email
+                email,
+                roleId
             }
             const accessToken = jwt.sign(response, process.env.PRIVATE_KEY, { expiresIn: '7d' });
             await userServices.updateAtt({token:accessToken}, { id: response.id});
@@ -91,6 +92,17 @@ class User {
             return util.send(res);
         }
     }
-
+    static async findById (req,res) {
+        const userId = req.params.id;
+        
+        try {
+            const user = await userServices.findById(userId);
+            util.setSuccess(200, user)
+            util.send (res)
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
 }
     module.exports = User;
