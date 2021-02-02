@@ -17,11 +17,13 @@ class rolePermService {
   static getRolePermissions() {
     return rolepermission.findAll();
   }
+
   static findPermByRole(roleId) {
     return rolepermission.findOne({
-      where: { role_id : modelId}
-    })
+      where: { role_id: modelId }
+    });
   }
+
   static createRolePermission(newrolePermission) {
     return rolepermission.create(newrolePermission);
   }
@@ -43,8 +45,14 @@ class rolePermService {
     });
   }
 
+  static findPermByRolrId(roleId) {
+    return rolepermission.findAll({
+      where: { role_id: roleId },
+    });
+  }
+
   static deletePermission(modelId) {
-    return rolepermission.drop({
+    return rolepermission.destroy({
       where: { id: modelId },
     });
   }

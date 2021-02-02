@@ -1,3 +1,4 @@
+
 import models from '../models';
 
 const { Role } = models;
@@ -30,8 +31,8 @@ class RoleService {
     });
   }
 
-  static findById(modelId) {
-    return Role.findByPk(modelId, {
+  static findById(roleId) {
+    return Role.findByPk(roleId, {
       include: [
         {
           model: Permission,
@@ -42,7 +43,7 @@ class RoleService {
   }
 
   static deleteRole(modelId) {
-    return Role.destroy(modelId);
+    return Role.destroy({where : {id: modelId}});
   }
 }
 export default RoleService;
