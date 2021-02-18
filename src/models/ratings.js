@@ -1,3 +1,4 @@
+/*eslint-disable */
 const {
   Model
 } = require('sequelize');
@@ -10,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Ratings.belongsTo(models.User, {
-        foreignKey: 'userId'
-      });
+      // Ratings.belongsTo(models.User, {
+      //   foreignKey: 'userId'
+      // });
   
-      Ratings.belongsTo(models.Accommodation, {
-        foreignKey: 'accommodationId'
-      });
+      // Ratings.belongsTo(models.Accommodation, {
+      //   foreignKey: 'accommodationId'
+      // });
     }
   };
   Ratings.init({
