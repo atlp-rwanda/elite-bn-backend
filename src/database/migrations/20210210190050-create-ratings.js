@@ -16,7 +16,7 @@ module.exports = {
           as: 'userId'
         }
       },
-      accommodationId: {
+      accomodationId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         reference: {
@@ -28,7 +28,11 @@ module.exports = {
       rating: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },review: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
