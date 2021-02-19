@@ -78,6 +78,16 @@ module.exports = {
         token: null,
         createdAt: new Date(),
         updatedAt: new Date(),
+      },{
+        firstName: 'William James',
+        lastName: 'Sidis',
+        email: 'sidis2009@gmail.com',
+        isVerified: true,
+        password: '$2b$10$5bVBlFQxpo3.laIrak8wFuRk5RkfkmLd5N1EuHVTlLFUto/eEoGqe',
+        roleId: 2,
+        token: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ],
     {},
