@@ -1,12 +1,12 @@
 /*eslint-disable */
 import Util from '../helpers/utils';
 import ReviewService from '../services/reviewService';
-import AccommodationService from '../services/accomodationService';
+import AccommodationService from '../services/accomodationServices';
 
 
-export default class ReviewController {
+ class ReviewController {
   
-  async addReview(req, res, next) {
+  static addReview = async(req, res, next)=> {
     try {
       const rawData = req.body;
 
@@ -24,7 +24,7 @@ export default class ReviewController {
   }
 
   
-  async addRating(req, res, next) {
+  static addRating = async(req, res, next)=>{
     try {
       const accommodation = await AccommodationService.getAccommodation({ id: req.params.id });
 
@@ -44,4 +44,5 @@ export default class ReviewController {
   }
 
 }
+export default ReviewController;
 

@@ -16,7 +16,7 @@ class ratingsValidation{
     }
     static sendToken = (req, res, next)=>{
         try{
-            const UserId = await jwt.verify(req.headers['authorization'].split(' ')[1], process.env.PRIVATE_KEY).id;
+            const UserId =  jwt.verify(req.headers['authorization'].split(' ')[1], process.env.PRIVATE_KEY).id;
             req.userId = UserId;
             next();
         }catch(error){
