@@ -33,7 +33,7 @@ class ratingsValidation{
             return util.send(res);
         }else{
             next();
-        }
+        } 
     }
     
 }

@@ -6,5 +6,5 @@ import ratingValidator from '../../../middlewares/validators/ratings'
 const router = express();
 
 router.post('/rate', ratingValidator.validate, ratingValidator.sendToken,ratingValidator.doesAccomodationExists, authorize.userAuthorize, RatingsController.rateAccomodation);
-
+router.get('/rateReviews', ratingValidator.sendToken, RatingsController.getRating);
 export default router;

@@ -42,11 +42,7 @@ class RatingService {
   static getRating() {
     return Rating.findAll(
       {
-        where: {
-          isVerified: 'true',
-          roleId: 4
-        },
-        attributes: ['id', 'email', 'lineManager', 'firstName'],
+        attributes: ['accomodationId', 'rating', 'review'],
       },
     );
   }
