@@ -1,3 +1,4 @@
+/*eslint-disable */
 import Util from '../helpers/utils';
 import ReviewService from '../services/reviewService';
 import AccommodationService from '../services/accomodationService';
