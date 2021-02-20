@@ -25,7 +25,7 @@ const util = new Util();
       util.setSuccess(200,'Rating and Reviews',getRate);
       return util.send(res);
     }
-    util.setError(401, error.message);
+    util.setError(400, error.message);
   }catch(error){
     util.setError(500,error.message);
     return util.send(res);
