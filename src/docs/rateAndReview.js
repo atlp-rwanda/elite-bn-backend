@@ -7,10 +7,6 @@
  *      description: "list rate and written review"
  *      consumes:
  *       - application/json
- *      parameters:
- *       - name: Authorization
- *         in: header
- *         required: true
  *      responses:
  *       "200":
  *         description: "Rating and Reviews"

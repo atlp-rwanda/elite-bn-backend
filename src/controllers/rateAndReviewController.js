@@ -18,6 +18,24 @@ const util = new Util();
     }
   }
 
+  static addReviews = async(req, res)=>{
+    try{
+      const ratingInformation = req.body;
+      ratingInformation.userId = req.userId;
+      const reviewAcc = await RatingService.getRatingById(ratingInformation);
+      console.log(reviewAcc,'>>>>>>>>>>>>>>><<<<<<<<<<');
+      if(reviewAcc){
+        await RatingService.updateAtt({reviewAcc:review},{UserId});
+        util.setSuccess(200,'written review successfully Added');
+        return util.send(res);
+      }
+
+    }catch(error){
+      util.setError(500,error.message);
+      return util.send(res)
+    }
+  }
+
  static getRating =async (req, res)=>{
   try{
     const getRate = await RatingService.getRating();

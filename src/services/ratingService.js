@@ -27,14 +27,10 @@ class RatingService {
       where: prop,
     });
   }
-  static getRating(id) {
+  static getRatingById(id) {
     return Rating.findAll(
       {
-        where: {
-          id,
-          isVerified: 'true',
-        },
-        attributes: ['id', 'email', 'lineManager', 'isVerified'],
+        attributes: ['userId', 'accomodationId', 'rating', 'review'],
       },
     );
   }
@@ -61,7 +57,7 @@ class RatingService {
     return Rating.findOne({
       where: { id: modelId },
     });
-  }
+  } 
   static drop(userEmail){
     return Rating.drop({where: {
       email: userEmail
