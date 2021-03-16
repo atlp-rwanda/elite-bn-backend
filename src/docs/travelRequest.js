@@ -6,8 +6,6 @@
 *       - Trips
 *     name: save trip
 *     summary: create trip request
-*     consumes:
-*        - multipart/form-data
 *     parameters:
 *       - name: Authorization
 *         in: header
@@ -49,4 +47,30 @@
 *       401:
 *             description: unAuthorized
 * */
+/**
+ * @swagger
+ * /api/v1/trip/findById/{id}:
+ *   get:
+ *     tags:
+ *       - Trips
+ *     name: find trip by id
+ *     summary: fetch trip by id
+ *     consumes:
+ *        - application/json
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
+ *       - name: id
+ *         in: path
+ *         required: true
+ *     responses:
+ *       200:
+ *             description: Permissions successfully fetched.
+ *       401:
+ *             description: unauthorized
+ * */
 
