@@ -10,6 +10,7 @@ import notificationsRoutes from './notifications/notifications';
 import ratingRoutes from './rating/rating';
 import reviewRoutes from './review/review';
 import tripRoutes from './trip/tripRoutes';
+import commentRoutes from './comments/commentRoutes';
 
 const router = express.Router();
 router.use('/users', userRoutes);
@@ -23,5 +24,6 @@ router.use('/notifications', notificationsRoutes);
 router.use('/rating', ratingRoutes);
 router.use('/review', reviewRoutes);
 router.use('/trips', tripRoutes);
+router.use('/comments', commentRoutes);
 
 export default router;
