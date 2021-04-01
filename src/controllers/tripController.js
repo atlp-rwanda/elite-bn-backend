@@ -1,8 +1,8 @@
 /* eslint-disable */
-import tripServices from "../services/tripServices";
-import eventEmitter from "../helpers/notifications/eventEmitter";
-import Util from "../helpers/utils";
-import { Listner } from "../helpers/notifications/eventListeners";
+import tripServices from '../services/tripServices';
+import eventEmitter from '../helpers/notifications/eventEmitter';
+import Util from '../helpers/utils';
+import { Listner } from '../helpers/notifications/eventListeners';
 
 Listner.eventTripListeners();
 Listner.editListener();
@@ -23,14 +23,18 @@ class TripController {
         travelDate: Date.now(),
       });
       const lineManagerId = req.body.lineManager;
-      eventEmitter.emit("TripRequest", {
+      eventEmitter.emit('TripRequest', {
         lineManagerId,
         id,
       });
-      util.setSuccess(201, "You have successfully created a trip", trip);
+      util.setSuccess(
+        201,
+        res.__('You have successfully created a trip'),
+        trip,
+      );
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while creating trip'));
       return util.send(res);
     }
   }
@@ -47,11 +51,15 @@ class TripController {
     tripServices
       .getAllTripsByRole(condition, itemsToSkip, itemsPerPage)
       .then((trips) => {
-        util.setSuccess(200, "You have successfully fetched the trips", trips);
+        util.setSuccess(
+          200,
+          res.__('You have successfully fetched the trips'),
+          trips,
+        );
         return util.send(res);
       })
       .catch(() => {
-        util.setError(500, "Something is wrong");
+        util.setError(500, res.__('There was an error while fetching trips'));
         return util.send(res);
       });
   }
@@ -65,31 +73,38 @@ class TripController {
       return util.send(res);
     }
     if (trip.user_id !== userId && trip.lineManager !== userId) {
-      util.setError(401, "You don't own this trip.");
+      util.setError(401, res.__("You don't own this trip."));
       return util.send(res);
     }
-    if (trip.status !== "pending") {
-      util.setError(409, `You can't cancel trip::${tripId}`);
+    if (trip.status !== 'pending') {
+      util.setError(409, res.__(`You can't cancel trip::${tripId}`));
       return util.send(res);
     }
 
     tripServices
-      .updateTrip({ status: "canceled" }, { id: tripId })
+      .updateTrip({ status: 'canceled' }, { id: tripId })
       .then((result) => {
         const lineManagerId = req.body.lineManager;
         const tripId = trip.id;
 
         const id = trip.user_id;
-        eventEmitter.emit("CancelTrip", {
+        eventEmitter.emit('CancelTrip', {
           lineManagerId,
           id,
           tripId,
         });
-        util.setSuccess(201, "You have successfully canceled the trip", result);
+        util.setSuccess(
+          201,
+          res.__('You have successfully canceled the trip'),
+          result,
+        );
         return util.send(res);
       })
       .catch(() => {
-        util.setError(500, "Something is wrong");
+        util.setError(
+          500,
+          res.__('There was an error while canceling the trip'),
+        );
         return util.send(res);
       });
   }
@@ -103,25 +118,32 @@ class TripController {
       return util.send(res);
     }
     if (trip.lineManager !== userId) {
-      util.setError(401, "Trip was not reported to you.");
+      util.setError(401, res.__('Trip was not reported to you.'));
       return util.send(res);
     }
     tripServices
-      .updateTrip({ status: "approved" }, { id: tripId })
+      .updateTrip({ status: 'approved' }, { id: tripId })
       .then((result) => {
         const tripId = trip.id;
         const lineManagerId = trip.lineManager;
         const id = trip.user_id;
-        eventEmitter.emit("ApproveTrip", {
+        eventEmitter.emit('ApproveTrip', {
           lineManagerId,
           id,
           tripId,
         });
-        util.setSuccess(201, "You have successfully approved the trip", result);
+        util.setSuccess(
+          201,
+          res.__('You have successfully approved the trip'),
+          result,
+        );
         return util.send(res);
       })
       .catch(() => {
-        util.setError(500, "Something is wrong");
+        util.setError(
+          500,
+          res.__('There was an error while approving the trip'),
+        );
         return util.send(res);
       });
   }
@@ -135,25 +157,29 @@ class TripController {
       return util.send(res);
     }
     if (trip.lineManager !== userId) {
-      util.setError(401, "Trip was not reported to you.");
+      util.setError(401, res.__('Trip was not reported to you.'));
       return util.send(res);
     }
     tripServices
-      .updateTrip({ status: "rejected" }, { id: tripId })
+      .updateTrip({ status: 'rejected' }, { id: tripId })
       .then((result) => {
         const tripId = trip.id;
         const lineManagerId = trip.lineManager;
         const id = trip.user_id;
-        eventEmitter.emit("RejectTrip", {
+        eventEmitter.emit('RejectTrip', {
           lineManagerId,
           id,
           tripId,
         });
-        util.setSuccess(201, "You have successfully rejected the trip", result);
+        util.setSuccess(
+          201,
+          res.__('You have successfully rejected the trip'),
+          result,
+        );
         return util.send(res);
       })
       .catch(() => {
-        util.setError(500, "Something is wrong");
+        util.setError(500, res.__('There was an error while rejecting a trip'));
         return util.send(res);
       });
   }
@@ -167,11 +193,11 @@ class TripController {
       return util.send(res);
     }
     if (trip.user_id !== userId && trip.lineManager !== userId) {
-      util.setError(401, "You don't own this trip.");
+      util.setError(401, res.__("You don't own this trip."));
       return util.send(res);
     }
-    if (trip.status !== "pending") {
-      util.setError(409, `You can't update trip::${tripId}`);
+    if (trip.status !== 'pending') {
+      util.setError(409, res.__(`You can't update trip::${tripId}`));
       return util.send(res);
     }
     const data = {
@@ -191,16 +217,20 @@ class TripController {
         const tripId = trip.id;
         const lineManagerId = trip.lineManager;
         const id = trip.user_id;
-        eventEmitter.emit("EditTrip", {
+        eventEmitter.emit('EditTrip', {
           lineManagerId,
           id,
           tripId,
         });
-        util.setSuccess(201, "You have successfully edited the trip", result);
+        util.setSuccess(
+          201,
+          res.__('You have successfully edited the trip'),
+          result,
+        );
         return util.send(res);
       })
       .catch(() => {
-        util.setError(500, "Something is wrong");
+        util.setError(500, res.__('There was an error while editing a trip'));
         return util.send(res);
       });
   }

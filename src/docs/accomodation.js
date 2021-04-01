@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /api/v1/accomodations/:
+ * /api/v1/accomodations/read:
  *   get:
  *     tags:
  *       - Accomodations
@@ -22,13 +22,13 @@
  *             description: unauthorized
  * */
 /**
-* @swagger
-* /api/v1/accomodations/create/:
-*   post:
-*     tags:
-*       - Accomodations
-*     name: Accomodations
-*     summary: create Accomodations
+ * @swagger
+ * /api/v1/accomodations/create/:
+ *   post:
+ *     tags:
+ *       - Accomodations
+ *     name: Accomodations
+ *     summary: create Accomodations
  *     consumes:
  *       - application/json
  *     parameters:
@@ -55,12 +55,12 @@
  *                 type: integer
  *         required:
  *                -permissionName
-*     responses:
-*       201:
-*             description: You have successfully created an accomodation.
-*       500:
-*             description: Server error.
-* */
+ *     responses:
+ *       201:
+ *             description: You have successfully created an accomodation.
+ *       500:
+ *             description: Server error.
+ * */
 /**
  * @swagger
  * /api/v1/Accomodations/read/{location_id}:
@@ -102,42 +102,42 @@
  * */
 
 /**
-* @swagger
-* /api/v1/accomodations/update/{id}:
-*   patch:
+ * @swagger
+ * /api/v1/accomodations/update/{id}:
+ *   patch:
  *     tags:
  *       - Accomodations
-*     name: accommodation update
-*     summary: update theAcommodationaccommodation
-*     consumes:
-*        - multipart/form-data
-*     parameters:
-*       - name: Authorization
-*         in: header
-*         required: true
-*       - name: permission_name
-*         in: header
-*         required: true
-*       - name: id
-*         in: path
-*         required: true
-*       - in: formData
-*         name: name
-*         type: string
-*         required: true
-*       - in: formData
-*         name: description
-*         type: string
-*         required: true
-*       - in: formData
-*         name: image
-*         type: file
-*         required: true
-*     responses:
-*       201:
-*             description: accomodation updated.
-*       400:
-*             description: Bad request.
-*       401:
-*             description: unAuthorized
-* */
+ *     name: accommodation update
+ *     summary: update theAcommodationaccommodation
+ *     consumes:
+ *        - multipart/form-data
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
+ *       - name: id
+ *         in: path
+ *         required: true
+ *       - in: formData
+ *         name: name
+ *         type: string
+ *         required: true
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *         required: true
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         required: true
+ *     responses:
+ *       201:
+ *             description: accomodation updated.
+ *       400:
+ *             description: Bad request.
+ *       401:
+ *             description: unAuthorized
+ * */

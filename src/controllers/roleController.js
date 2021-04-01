@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Util from '../helpers/utils';
 import roleService from '../services/roleService';
 
@@ -6,10 +7,10 @@ export default class Role {
   static async allRoles(req, res) {
     try {
       const roles = await roleService.getRoles();
-      util.setSuccess(200, 'all roles', roles);
+      util.setSuccess(200, res.__('successfully fetched all roles'), roles);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while fetching roles'));
       return util.send(res);
     }
   }
@@ -18,10 +19,10 @@ export default class Role {
     try {
       const { name } = req.body;
       const createdRole = await roleService.createRole({ name });
-      util.setSuccess(200, 'Role created', createdRole);
+      util.setSuccess(200, res.__('successfully created role'), createdRole);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while creating a role'));
       return util.send(res);
     }
   }
@@ -30,10 +31,10 @@ export default class Role {
     try {
       const { id } = req.params;
       const singleRole = await roleService.findById(id);
-      util.setSuccess(200, 'Successfully retrieved Role', singleRole);
+      util.setSuccess(200, res.__('Successfully retrieved Role'), singleRole);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while fetching a role'));
       return util.send(res);
     }
   }
@@ -42,10 +43,10 @@ export default class Role {
     try {
       const { name } = req.params;
       const singleRole = await roleService.findByName({ name });
-      util.setSuccess(200, 'Successfully retrieved Role', singleRole);
+      util.setSuccess(200, res.__('Successfully retrieved Role'), singleRole);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while fetching a role'));
       return util.send(res);
     }
   }
@@ -56,10 +57,10 @@ export default class Role {
       const { id } = req.params;
 
       const updatedRole = await roleService.updateAtt({ name }, { id });
-      util.setSuccess(200, 'Role updated successfuly', updatedRole);
+      util.setSuccess(200, res.__('Role updated successfuly'), updatedRole);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while updating a role'));
       return util.send(res);
     }
   }
@@ -68,10 +69,10 @@ export default class Role {
     try {
       const { id } = req.params;
       const deletedRole = await roleService.deleteRole(id);
-      util.setSuccess(200, 'Role deleted successfully', deletedRole);
+      util.setSuccess(200, res.__('Role deleted successfully', deletedRole));
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(500, res.__('There was an error while deleting a role'));
       return util.send(res);
     }
   }

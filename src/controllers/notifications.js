@@ -1,25 +1,27 @@
-/*eslint-disable*/ 
+/*eslint-disable*/
 import notificationsServices from '../services/notificationsServices';
 import emailSender from '../services/emailService';
 import { renderEmail } from '../services/template/notificationTemplate';
 import Util from '../helpers/utils';
 
-
 const util = new Util();
 
 export default class Notifications {
-    static async notifyUser(notification, email) {
-        await notificationsServices.createNotification(notification);
-        emailSender(renderEmail(notification.message), notification.subject, email);
-}
-static async showAllNotifications(req, res) {
+  static async notifyUser(notification, email) {
+    await notificationsServices.createNotification(notification);
+    emailSender(renderEmail(notification.message), notification.subject, email);
+  }
+  static async showAllNotifications(req, res) {
     try {
       const { id } = req.userData;
       const notifications = await notificationsServices.getNotifications(id);
-      util.setSuccess(200, 'Notifications', notifications);
+      util.setSuccess(200, res.__('Notifications'), notifications);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(
+        500,
+        res.__('There was an error while getting all notifications'),
+      );
       return util.send(res);
     }
   }
@@ -28,13 +30,22 @@ static async showAllNotifications(req, res) {
     try {
       const { id } = req.userData;
       const { notificationId } = req.params;
-      const notifications = await notificationsServices.getOne({ receiverId: id, id: notificationId });
-      await notificationsServices.update({ receiverId: id, id: notificationId });
-      util.setSuccess(200, 'Notifications', notifications);
+      const notifications = await notificationsServices.getOne({
+        receiverId: id,
+        id: notificationId,
+      });
+      await notificationsServices.update({
+        receiverId: id,
+        id: notificationId,
+      });
+      util.setSuccess(200, res.__('Notifications'), notifications);
       return util.send(res);
     } catch (error) {
-      util.setError(500, error.message);
+      util.setError(
+        500,
+        res.__('There was an error while fetching a notification'),
+      );
       return util.send(res);
     }
   }
-};
+}
