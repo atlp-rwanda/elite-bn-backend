@@ -49,6 +49,7 @@
     "express-async-handler": "^1.1.4",
     "express-fileupload": "^1.2.1",
     "fs": "0.0.1-security",
+    "i18n": "^0.13.2",
     "install": "^0.13.0",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",

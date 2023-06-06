@@ -1,8 +1,8 @@
 /* eslint-disable */
-import models from "../models";
-import Util from "../helpers/utils";
-import eventEmitter from "../helpers/notifications/eventEmitter";
-import { Listner } from "../helpers/notifications/eventListeners";
+import models from '../models';
+import Util from '../helpers/utils';
+import eventEmitter from '../helpers/notifications/eventEmitter';
+import { Listner } from '../helpers/notifications/eventListeners';
 
 Listner.CommentTrip();
 const util = new Util();
@@ -16,7 +16,7 @@ class Comment {
 
       const trip = await models.Trip.findOne({ where: { id: tripId } });
       if (!trip) {
-        util.setError(404, "the trip does not exist");
+        util.setError(404, res.__('the trip does not exist'));
         return util.send(res);
       }
       const saveComment = await models.comment.create({
@@ -26,18 +26,18 @@ class Comment {
       });
       const lineManagerId = trip.lineManager;
 
-      eventEmitter.emit("CommentOnTrip", {
+      eventEmitter.emit('CommentOnTrip', {
         lineManagerId,
         id,
       });
       util.setSuccess(
         201,
-        "You have successfully created a comment",
-        saveComment
+        res.__('You have successfully created a comment'),
+        saveComment,
       );
       return util.send(res);
     } catch (error) {
-      util.setError(400, "the trip does not belong to you");
+      util.setError(400, res.__('the trip does not belong to you'));
       return util.send(res);
     }
   }
@@ -47,14 +47,18 @@ class Comment {
     const { id } = req.params;
     models.comment.destroy({ where: { id } }).then((num) => {
       if (num === 1) {
-        util.setError(200, {
-          message: `Successfully Deleted comment with id=${id}`,
-        });
+        util.setError(
+          200,
+          res.__(`Successfully Deleted comment with id=${id}`),
+        );
         return util.send(res);
       }
-      util.setError(404, {
-        message: `Can not Delete comment with id=${id}.maybe Not Found in Database'`,
-      });
+      util.setError(
+        404,
+        res.__(
+          `Can not Delete comment with id=${id}.maybe Not Found in Database`,
+        ),
+      );
       return util.send(res);
     });
   }
